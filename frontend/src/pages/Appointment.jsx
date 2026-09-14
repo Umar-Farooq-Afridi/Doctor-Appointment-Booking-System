@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets_frontend/assets";
+import RelatedDoctors from "../components/RelatedDoctors";
 
 const Appointment = () => {
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -174,6 +175,9 @@ const Appointment = () => {
               Book an Appointment
             </button>
           </div>
+
+          {/* realted doctors component  */}
+          <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
         </>
       )}
     </div>
