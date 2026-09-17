@@ -1,8 +1,22 @@
+import { useContext } from "react";
+import Login from "./pages/Login";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AdminContext } from "./context/AdminContext";
+
 const App = () => {
-  return (
-    <div className="flex items-center justify-center bg-blue-500 text-white p-4">
-      <h1>Admin Panel.</h1>
+  const { aToken } = useContext(AdminContext);
+
+  return aToken ? (
+    <div>
+      <ToastContainer />
+      <h1>Admin Panel</h1>
     </div>
+  ) : (
+    <>
+      <Login />
+      <ToastContainer />
+    </>
   );
 };
 
