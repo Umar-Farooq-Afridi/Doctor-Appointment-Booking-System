@@ -103,4 +103,20 @@ const loginAdmin = async (request, response) => {
   }
 };
 
-export { addDoctor, loginAdmin };
+const allDoctors = async (request, response) => {
+  try {
+    const doctors = await doctorModel.find({}).select("-password");
+    if (!doctors) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Doctors not found." });
+    }
+
+    response.status(200).json({ success: true, doctors });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export { addDoctor, loginAdmin, allDoctors };
