@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import adminRouter from "./routes/admin.route.js";
 import doctorRouter from "./routes/doctor.route.js";
+import userRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.get("/", (request, response) => {
 
 app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
+app.use("/api/user", userRouter);
 
 export default app;
