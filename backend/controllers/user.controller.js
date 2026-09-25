@@ -178,4 +178,28 @@ const bookAppointment = async (request, response) => {
   }
 };
 
-export { registerUser, loginUser, getProfile, updateProfile, bookAppointment };
+const listAppointment = async (request, response) => {
+  try {
+    const { userId } = request.body;
+    const appointments = await appointmentModel.find({ userId });
+    if (!appointments) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Appointments not found." });
+    }
+
+    response.status(200).json({ success: false, appointments });
+  } catch (error) {
+    console.log(error);
+    response.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  getProfile,
+  updateProfile,
+  bookAppointment,
+  listAppointment,
+};
