@@ -42,7 +42,7 @@ const registerUser = async (request, response) => {
       .json({ success: true, token, message: "User Created Successfully." });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -70,7 +70,7 @@ const loginUser = async (request, response) => {
     }
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -87,7 +87,7 @@ const getProfile = async (request, response) => {
     response.status(200).json({ success: true, userData });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -122,7 +122,7 @@ const updateProfile = async (request, response) => {
     response.status(200).json({ success: true, message: "Profile Updated." });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -191,7 +191,43 @@ const listAppointment = async (request, response) => {
     response.status(200).json({ success: false, appointments });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const cancelAppointment = async (request, response) => {
+  try {
+    const { userId, appointmentId } = request.body;
+
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if (appointmentData.userId !== userId) {
+      return response
+        .status(400)
+        .json({ success: false, message: "Unauthorized action." });
+    }
+
+    // canceling appointment
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      cancelled: true,
+    });
+
+    // releasing doctor slot
+    const { docId, slotDate, slotTime } = appointmentData;
+    const doctorData = await doctorModel.findById(docId);
+
+    let slots_booked = doctorData.slots_booked;
+    slots_booked[slotDate] = slots_booked[slotDate].filter(
+      (e) => e !== slotTime,
+    );
+
+    await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+
+    response
+      .status(200)
+      .json({ success: true, message: "Appointment canceled." });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -202,4 +238,5 @@ export {
   updateProfile,
   bookAppointment,
   listAppointment,
+  cancelAppointment,
 };

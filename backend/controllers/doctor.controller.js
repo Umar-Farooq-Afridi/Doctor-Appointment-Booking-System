@@ -13,7 +13,7 @@ const changeAvailability = async (request, response) => {
       .json({ success: true, message: "Availability Changed" });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -29,7 +29,7 @@ const doctorList = async (request, response) => {
     response.status(200).json({ success: true, doctors });
   } catch (error) {
     console.log(error);
-    response.status(400).json({ success: false, message: error.message });
+    response.status(500).json({ success: false, message: error.message });
   }
 };
 
