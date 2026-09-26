@@ -3,6 +3,7 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import jwt from "jsonwebtoken";
+import appointmentModel from "../models/appointment.model.js";
 
 const addDoctor = async (request, response) => {
   try {
@@ -119,4 +120,20 @@ const allDoctors = async (request, response) => {
   }
 };
 
-export { addDoctor, loginAdmin, allDoctors };
+const appointmentsAdmin = async (request, response) => {
+  try {
+    const appointments = await appointmentModel.find({});
+    if (!appointments) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Appointments not found." });
+    }
+
+    response.status(200).json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export { addDoctor, loginAdmin, allDoctors, appointmentsAdmin };
