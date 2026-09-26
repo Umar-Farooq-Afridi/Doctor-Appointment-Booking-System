@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../models/appointment.model.js";
+import userModel from "../models/user.model.js";
 
 const addDoctor = async (request, response) => {
   try {
@@ -165,10 +166,31 @@ const appointmentCancel = async (request, response) => {
   }
 };
 
+const adminDashboard = async (request, response) => {
+  try {
+    const doctors = await doctorModel.find({});
+    const users = await userModel.find({});
+    const appointments = await appointmentModel.find({});
+
+    const dashData = {
+      doctors: doctors.length,
+      appointments: appointments.length,
+      patients: users.length,
+      latestAppointments: appointments.reverse().slice(0, 5),
+    };
+
+    response.status(200).json({ success: true, dashData });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export {
   addDoctor,
   loginAdmin,
   allDoctors,
   appointmentsAdmin,
   appointmentCancel,
+  adminDashboard,
 };
