@@ -61,4 +61,22 @@ const loginDoctor = async (request, response) => {
   }
 };
 
-export { changeAvailability, doctorList, loginDoctor };
+const appointmentsDoctor = async (request, response) => {
+  try {
+    const { docId } = request.body;
+    const appointments = await doctorModel.find({ docId });
+
+    if (!appointments) {
+      return response
+        .status(404)
+        .json({ success: false, message: "No Doctor Appointments." });
+    }
+
+    response.status(200).json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor };
