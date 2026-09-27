@@ -20,7 +20,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.home_icon} />
-            <p>Dashboard</p>
+            <p className="hidden md:block">Dashboard</p>
           </NavLink>
 
           <NavLink
@@ -31,7 +31,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.appointment_icon} />
-            <p>Appointments</p>
+            <p className="hidden md:block">Appointments</p>
           </NavLink>
 
           <NavLink
@@ -42,7 +42,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.add_icon} />
-            <p>Add Doctor</p>
+            <p className="hidden md:block">Add Doctor</p>
           </NavLink>
 
           <NavLink
@@ -53,7 +53,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.people_icon} />
-            <p>Doctor List</p>
+            <p className="hidden md:block">Doctor List</p>
           </NavLink>
         </ul>
       )}
@@ -68,7 +68,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.home_icon} />
-            <p>Dashboard</p>
+            <p className="hidden md:block">Dashboard</p>
           </NavLink>
 
           <NavLink
@@ -79,7 +79,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.appointment_icon} />
-            <p>Appointments</p>
+            <p className="hidden md:block">Appointments</p>
           </NavLink>
 
           <NavLink
@@ -90,7 +90,7 @@ const Sidebar = () => {
             ${isActive ? "bg-[#F2F3FF] border-r-4 border-primary" : ""}`}
           >
             <img src={assets.people_icon} />
-            <p>Profile</p>
+            <p className="hidden md:block">Profile</p>
           </NavLink>
         </ul>
       )}
