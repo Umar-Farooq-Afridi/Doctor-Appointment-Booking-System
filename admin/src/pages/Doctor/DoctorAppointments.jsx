@@ -5,7 +5,13 @@ import { useEffect } from "react";
 import { assets } from "../../assets/assets_admin/assets";
 
 const DoctorAppointments = () => {
-  const { dToken, appointments, getAppointments } = useContext(DoctorContext);
+  const {
+    dToken,
+    appointments,
+    getAppointments,
+    completeAppointment,
+    cancelAppointment,
+  } = useContext(DoctorContext);
   const { calculateAge, slotDateFormat, currency } = useContext(AppContext);
 
   useEffect(() => {
@@ -36,7 +42,7 @@ const DoctorAppointments = () => {
         </div>
 
         {/* appointments data  */}
-        {appointments.map((item, index) => (
+        {appointments.reverse().map((item, index) => (
           <div
             key={index}
             className="flex flex-wrap justify-between max-sm:gap-5 max-sm:text-base sm:grid 
@@ -66,10 +72,24 @@ const DoctorAppointments = () => {
               {item.amount}
             </p>
 
-            <div className="flex">
-              <img src={assets.cancel_icon} className="w-10 cursor-pointer" />
-              <img src={assets.tick_icon} className="w-10 cursor-pointer" />
-            </div>
+            {item.cancelled ? (
+              <p className="text-red-400 text-xs font-medium">Cancelled</p>
+            ) : item.isCompleted ? (
+              <p className="text-green-500 text-xs font-medium">Completed</p>
+            ) : (
+              <div className="flex">
+                <img
+                  onClick={() => cancelAppointment(item._id)}
+                  src={assets.cancel_icon}
+                  className="w-10 cursor-pointer"
+                />
+                <img
+                  onClick={() => completeAppointment(item._id)}
+                  src={assets.tick_icon}
+                  className="w-10 cursor-pointer"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

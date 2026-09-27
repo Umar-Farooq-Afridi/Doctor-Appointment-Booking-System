@@ -79,4 +79,59 @@ const appointmentsDoctor = async (request, response) => {
   }
 };
 
-export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor };
+const appointmentComplete = async (request, response) => {
+  try {
+    const { docId, appointmentId } = request.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (appointmentData && appointmentData.docId === docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, {
+        isCompleted: true,
+      });
+
+      return response
+        .status(200)
+        .json({ success: true, message: "Appointment Completed" });
+    } else {
+      return response
+        .status(400)
+        .json({ success: false, message: "Mark Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const appointmentCancel = async (request, response) => {
+  try {
+    const { docId, appointmentId } = request.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+    if (appointmentData && appointmentData.docId === docId) {
+      await appointmentModel.findByIdAndUpdate(appointmentId, {
+        cancelled: true,
+      });
+
+      return response
+        .status(200)
+        .json({ success: true, message: "Appointment Cancelled" });
+    } else {
+      return response
+        .status(400)
+        .json({ success: false, message: "Cancellation Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export {
+  changeAvailability,
+  doctorList,
+  loginDoctor,
+  appointmentsDoctor,
+  appointmentComplete,
+  appointmentCancel,
+};
