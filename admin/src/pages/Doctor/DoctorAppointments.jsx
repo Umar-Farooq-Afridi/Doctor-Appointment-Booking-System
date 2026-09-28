@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DoctorContext } from "../../context/DoctorContext";
-import { AppContext } from "../../context/AdminContext";
+import { AppContext } from "../../context/AppContext";
 import { useEffect } from "react";
 import { assets } from "../../assets/assets_admin/assets";
 
