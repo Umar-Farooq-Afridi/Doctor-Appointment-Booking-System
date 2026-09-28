@@ -165,6 +165,38 @@ const doctorDashboard = async (request, response) => {
   }
 };
 
+const doctorProfile = async (request, response) => {
+  try {
+    const { docId } = request.body;
+    const profileData = await doctorModel
+      .findById({ docId })
+      .select("-password");
+
+    if (!profileData) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Profile data not found." });
+    }
+
+    response.status(200).json({ success: true, profileData });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
+const updateDoctorProfile = async (request, response) => {
+  try {
+    const { docId, fees, address, available } = request.body;
+    await doctorModel.findById(docId, { fees, address, available });
+
+    response.status(200).json({ success: true, message: "Profile Updated." });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export {
   changeAvailability,
   doctorList,
@@ -173,4 +205,6 @@ export {
   appointmentComplete,
   appointmentCancel,
   doctorDashboard,
+  doctorProfile,
+  updateDoctorProfile,
 };
