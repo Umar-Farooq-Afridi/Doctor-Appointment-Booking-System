@@ -1,4 +1,4 @@
-# Doctor Appointment Booking Web Application (MERN Stack)
+# Doctor Appointment Booking Web App (MERN Stack)
 
 ## About the Project
 
@@ -50,19 +50,20 @@ ECommerce-Project/
 - A Cloudinary account (for image uploads)
 
 ### 1. Clone the repository
-bash
+```bash
 git clone https://github.com/Umar-Farooq-Afridi/Doctor-Appointment-Booking-System.git
-cd ECommerce-Project
-
+cd Doctor-Appointment-Booking-System
+```
 
 ### 2. Backend setup
-bash
+```bash
 cd backend
 npm install
-
+```
 
 Create a .env file in backend/ with:
 
+```bash
 DABS_MONGO_DB_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ADMIN_EMAIL=your_admin_email
@@ -70,28 +71,29 @@ ADMIN_PASSWORD=your_admin_password
 CLOUDINARY_NAME=your_cloudinary_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_SECRET_KEY=your_cloudinary_secret
+```
 
 
 Run the backend:
-bash
-npm run dev
-
+```bash
+npm run server
+```
 
 ### 3. Frontend setup (store)
-bash
+```bash
 cd ../frontend
 npm install
 npm run dev
-
+```
 
 ### 4. Admin panel setup
-bash
+```bash
 cd ../admin
 npm install
 npm run dev
+```
 
-
-API Endpoints
+## API Endpoints
 
 | Route | Method | Description | Auth |
 |---|---|---|---|
@@ -120,6 +122,6 @@ API Endpoints
 
 ## Author
 
-# *Umar Farooq: Software Engineer | Web Developer | MERN Stack Developer*
+### *Umar Farooq: Software Engineer | Web Developer | MERN Stack Developer*
 - GitHub: [@Umar-Farooq-Afridi](https://github.com/Umar-Farooq-Afridi)
 - Portfolio: [umar-farooq-portfolio.vercel.app](https://umar-farooq-portfolio.vercel.app)
