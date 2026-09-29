@@ -36,7 +36,7 @@ A full-stack Doctor appointment platform built with MERN stack, featuring user/p
 ## Project Structure
 
 ```bash
-ECommerce-Project/
+Doctor-Appointment-Booking-System/
 ├── frontend/     # Customer-facing storefront (React + Vite)
 ├── admin/        # Admin dashboard (React + Vite)
 └── backend/      # REST API (Express + MongoDB)
